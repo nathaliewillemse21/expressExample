@@ -1,37 +1,41 @@
-// console.log("Welcome to Express JS");
+// // // console.log("Welcome to Express JS");
 
-import express from 'express'
+import express from 'express';
+import path from 'path';
 
-// const express = require('express') {Common JS}
+// // const express = require('express')
+// // {Common JS }
 
-// Create an express app
-const app = express()
-const port = +process.env.PORT || 4000
-// Router
+// // Create an express app
+// const app = express()
+// const router = express.Router()
+// app.use(router)
+// const port = +process.env.PORT || 4000
+// // Router
 
-app.get('/', (req, res) => {
-    res.json({
-        status: res.statusCode,
-        msg: 'You\'re home'
-    })
+// router.get('^/$|/express ', display, (req, res) => {
+//     // res.json({
+//     //     status: res.statusCode,
+//     //     msg: 'You\'re home'
+//     })
 //     res.status(200).json({
 //         msg: 'You\'re home'
-})
-app.get('/about', (req, res) => {
-    res.json({
-        status: res.statusCode,
-        msg: 'About page'
-    })
-})
+// })
+// router.get('/about', (req, res) => {
+//     res.json({
+//         status: res.statusCode,
+//         msg: 'About page'
+//     })
+// })
 
-app.all('*', (req, res) => {
-    res.json({
-        status: res.statusCode,
-        msg: '404 Page'
-    })
-})
+// router.all('*', (req, res) => {
+//     res.json({
+//         status: res.statusCode,
+//         msg: '404 Page'
+//     })
+// })
 // app.get('/jobTiltle')
-app.listen(port)
+
 
 
 
@@ -46,11 +50,63 @@ HTTP  Methods
 
 
 
+// Middleware {to be more spesific}
+
+// function display(req, res, next) {
+//     console.log("Hello there");
+//     next()
+// }
 
 
 
 
 
+
+// app.listen(port)
+
+
+
+// router middleware
+// static file
+// class
+// mvc (model view controller)
+    
+
+const app = express()
+const router = express.Router()
+app.use(
+    router, express.static('./static')
+)
+const port = +process.env.PORT || 4000
+// Router: express
+
+router.get('^/$|/express', display, (req, res) => {
+    res.status(200).sendFile(path.resolve('./static/html/index.html'))
+})
+router.get('/about', (req, res) => {
+      res.json({
+          status: res.statusCode,
+          msg: 'About page'
+      })
+  })
+
+router.all('*', (req, res) => {
+    res.json({
+        status: res.statusCode,
+        msg: '404 Page'
+    })
+})
+ function display(req, res, next) {
+    console.log("Hello there");
+    next()
+}
+
+
+
+
+
+
+app.listen(port)
 
 
 
